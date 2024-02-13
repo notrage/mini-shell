@@ -13,7 +13,7 @@ VPATH=src/
 LIBS+=-lpthread
 
 INCLUDE = readcmd.h csapp.h
-OBJS = readcmd.o csapp.o
+OBJS = readcmd.o csapp.o cmd_extern.o cmd_intern.o
 INCLDIR = -I.
 
 all: shell

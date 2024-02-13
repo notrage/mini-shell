@@ -6,40 +6,49 @@
 #include <stdlib.h>
 #include "readcmd.h"
 #include "csapp.h"
-
+#include "shell.h"
+#include "cmd_intern.h"
+#include "cmd_extern.h"
 
 int main()
 {
-	while (1) {
+	while (1)
+	{
 		struct cmdline *l;
-		int i, j;
+		int i;
 
-		printf("shell> ");
+		printf("$> ");
 		l = readcmd();
 
-		/* If input stream closed, normal termination */
-		if (!l) {
-			printf("exit\n");
-			exit(0);
-		}
-
-		if (l->err) {
+		if (l->err)
+		{
 			/* Syntax error, read another command */
 			printf("error: %s\n", l->err);
 			continue;
 		}
 
-		if (l->in) printf("in: %s\n", l->in);
-		if (l->out) printf("out: %s\n", l->out);
+		if (l->in)
+			printf("in: %s\n", l->in);
+		if (l->out)
+			printf("out: %s\n", l->out);
 
 		/* Display each command of the pipe */
-		for (i=0; l->seq[i]!=0; i++) {
+		for (i = 0; l->seq[i] != 0; i++)
+		{
 			char **cmd = l->seq[i];
-			printf("seq[%d]: ", i);
-			for (j=0; cmd[j]!=0; j++) {
-				printf("%s ", cmd[j]);
-			}
+			if (is_cmd_intern(cmd))
+				exec_cmd_intern(cmd);
+			else
+				exec_cmd_extern(cmd, l->in, l->out);
 			printf("\n");
 		}
 	}
+}
+
+int is_cmd_intern(char **cmd) {
+	char *exec = cmd[0];
+	if (!strcmp(exec, "cd") || !strcmp(exec, "quit"))
+		return 1;
+	else
+		return 0;
 }
