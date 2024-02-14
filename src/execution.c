@@ -1,11 +1,16 @@
 #include "execution.h"
 #include "error.h"
 
+void quit() {
+    exit(0);
+}
+
 void internal_cmd(char **cmd) {
     if (!strcmp(cmd[0], "quit"))
-    {
-        exit(0);
-    } else if (!strcmp(cmd[0], "cd"))
+        quit();
+    else if (!strcmp(cmd[0], "exit"))
+        quit();
+    else if (!strcmp(cmd[0], "cd"))
     {
         //chdir(cmd[1]);
     }
@@ -13,13 +18,16 @@ void internal_cmd(char **cmd) {
 }
 
 void external_cmd(char **cmd, char *in, char *out) {
+    
     pid_t pid;
+
     switch (pid = fork())
     {
-    case -1:
+    case -1: // error
         fork_error(cmd[0]);
         break;
-    case 0:
+    case 0: // child
+
         if (in)
         {
             int fd = open(in, O_RDONLY);
@@ -38,7 +46,7 @@ void external_cmd(char **cmd, char *in, char *out) {
         // if execvp returns, it must have failed
         exec_error(cmd[0]);
         break;
-    default:
+    default: // parent
         wait(NULL);
         break;
     }   
