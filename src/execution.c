@@ -28,6 +28,8 @@ void external_cmd(char **cmd, char *in, char *out) {
         break;
     case 0: // child
 
+        
+
         if (in)
         {
             int fd = open(in, O_RDONLY);
