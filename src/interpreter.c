@@ -10,6 +10,7 @@ void exec_cmd_line(struct cmdline *cmd_line) {
     int nb_cmds;
     for (nb_cmds = 0; cmd_line->seq[nb_cmds] != 0; nb_cmds++) {
     }
+    
 
     int **pipes = (int **) malloc(sizeof(int *) * nb_cmds -1);
 
@@ -17,7 +18,7 @@ void exec_cmd_line(struct cmdline *cmd_line) {
         pipes[pipe_index] = (int *) malloc(sizeof(int) * 2);
         pipe(pipes[pipe_index]);
     }
-
+    
     for (int process_index = 0; process_index < nb_cmds; process_index++) {
 
         char **cmd = cmd_line->seq[process_index];
@@ -43,15 +44,12 @@ void exec_cmd_line(struct cmdline *cmd_line) {
                 }
 
                 pipes_handling(pipes, nb_cmds-1, process_index);
-                 
+                
                 execvp(cmd[0], cmd);
                 // if execvp returns, it must have failed
                 exec_error(cmd[0]);
             } else { // parent
-                pipes_handling(pipes, nb_cmds-1, -10);
-                fprintf(stderr, "Attente fils\n");
-                wait(NULL);
-                fprintf(stderr, "Fils fini\n");
+                // nothing to do here
             }
         }
     }
