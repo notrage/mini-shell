@@ -43,12 +43,15 @@ void exec_cmd_line(struct cmdline *cmd_line) {
                 }
 
                 pipes_handling(pipes, nb_cmds-1, process_index);
-
+                 
                 execvp(cmd[0], cmd);
                 // if execvp returns, it must have failed
                 exec_error(cmd[0]);
             } else { // parent
+                pipes_handling(pipes, nb_cmds-1, -10);
+                fprintf(stderr, "Attente fils\n");
                 wait(NULL);
+                fprintf(stderr, "Fils fini\n");
             }
         }
     }
@@ -60,11 +63,9 @@ void pipes_handling(int **pipes, int nb_pipes, int rank) {
     for (int i = 0; i < nb_pipes; i++) {
 
         if (i == rank-1) {
-            printf("%d -> %d\n", pipes[i][0], 0);
             dup2(pipes[i][0],0);
             close(pipes[i][1]);
         } else if (i == rank) {
-            printf("%d -> %d\n", pipes[i][1], 1);
             close(pipes[i][0]);
             dup2(pipes[i][1],1);
         } else {
