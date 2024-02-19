@@ -22,14 +22,16 @@ void exec_cmd_line(struct cmdline *cmd_line) {
     for (int process_index = 0; process_index < nb_cmds; process_index++) {
 
         char **cmd = cmd_line->seq[process_index];
-        if (!strcmp(cmd[0], "quit") || !strcmp(cmd[0], "exit")) {
+        if (!strcmp(cmd[0], "quit") || !strcmp(cmd[0], "exit")) 
+        {
             quit();
         }
-        else {
+        else 
+        {
             pid_t pid;
 
-            if (!(pid = Fork())) { // child
-
+            if (!(pid = Fork())) // child
+            {
                 if (cmd_line->in) {
                     int fd = open(cmd_line->in, O_RDONLY);
                     if (fd < 0) open_error(cmd_line->in);
@@ -48,11 +50,14 @@ void exec_cmd_line(struct cmdline *cmd_line) {
                 execvp(cmd[0], cmd);
                 // if execvp returns, it must have failed
                 exec_error(cmd[0]);
-            } else { // parent
+            } 
+            else // parent 
+            { 
                 // nothing to do here
             }
         }
     }
+    while(wait(NULL) == 0);
     return;
 }
 
