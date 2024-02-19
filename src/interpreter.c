@@ -5,7 +5,7 @@
 void exec_cmd_line(struct cmdline *cmd_line) {
     
     // if user type ^D (EOF) in the shell, we quit the program
-    if (!cmd_line) quit();
+    if (!cmd_line) exit(0);
 
     // counting the number of commandes in the command line
     int nb_cmds;
@@ -60,11 +60,12 @@ void exec_cmd_line(struct cmdline *cmd_line) {
         } 
         else // parent 
         { 
-
+            // nothing to do here
         }
     }
     // waiting for all the children to terminate
-    while(wait(NULL) == 0);
+    pipes_handling(pipes, nb_cmds-1, -1);
+    while(wait(NULL) > 0);
     return;
 }
 
