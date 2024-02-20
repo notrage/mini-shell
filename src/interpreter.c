@@ -13,6 +13,11 @@ void exec_cmd_line(struct cmdline *cmd_line) {
     // if user type ^D (EOF) in the shell, quit the executions
     if (!cmd_line) return;
 
+    if (cmd_line->err) {
+        cmd_line_error(cmd_line->err);
+        return;
+    }
+
     // counting the number of commandes in the command line
     for (nb_cmds = 0; cmd_line->seq[nb_cmds] != 0; nb_cmds++) {
     }

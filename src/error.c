@@ -4,19 +4,20 @@
 
 void fork_error(char *cmd) {
     fprintf(stderr, "%s: fork failed\n", cmd);
-    exit(1);
     return;
 }
 
 void exec_error(char *cmd) {
     fprintf(stderr, "%s: command not found\n", cmd);
-    exit(1);
     return;
 }
 
 void open_error(char *file) {
     fprintf(stderr, "%s: permission denied\n", file);
-    exit(1);
     return;
 }
 
+void cmd_line_error(char *error) {
+    fprintf(stderr, "error: %s\n", error);
+    return;
+}

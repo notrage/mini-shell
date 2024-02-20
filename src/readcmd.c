@@ -194,6 +194,15 @@ struct cmdline *readcmd(void)
 	i = 0;
 	while ((w = words[i++]) != 0) {
 		switch (w[0]) {
+		case '&':
+			if (words[i] == 0)
+				s->mode = 1;
+			else 
+			{
+				s->err = "unexpected &";
+				goto error;
+			}
+			break;
 		case '<':
 			/* Tricky : the word can only be "<" */
 			if (s->in) {
@@ -259,6 +268,7 @@ error:
 		case '<':
 		case '>':
 		case '|':
+		case '&':
 			break;
 		default:
 			free(w);
