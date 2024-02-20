@@ -9,13 +9,17 @@
 
 int main()
 {
-	while (1)
-	{
-		struct cmdline *l;
-		printf("MINI-SHELL > ");
+	struct cmdline *l = NULL;
+
+	do {
+		// giving the prompt
+		printf("PUM-TZIN > ");
+		// read command line
 		l = readcmd();
+		// interpret command line
 		exec_cmd_line(l);
-	}
 	
+	} while (l);
+
 	return 0;
 }
