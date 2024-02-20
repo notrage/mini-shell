@@ -1,5 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
 #include "error.h"
 
 void fork_error(char *cmd) {

@@ -1,15 +1,12 @@
-#include "csapp.h"
-#include "error.h"
 #include "interpreter.h"
 
 void exec_cmd_line(struct cmdline *cmd_line) {
 
-    int nb_cmds;
+    int nb_cmds, fd;
     char **cmd;
     int **pipes;
-    int fd;
     pid_t pid;
-    
+
     // if user type ^D (EOF) in the shell, quit the executions
     if (!cmd_line) return;
 
@@ -19,13 +16,7 @@ void exec_cmd_line(struct cmdline *cmd_line) {
     }
 
     // counting the number of commandes in the command line
-    for (nb_cmds = 0; cmd_line->seq[nb_cmds] != 0; nb_cmds++) {
-    }
-
-    if (cmd_line->mode == 1) {
-        fprintf(stderr, "Processus yfuaca en background\n");
-        fprintf(stderr, "nb cmds: %d\n", nb_cmds);
-    }
+    for (nb_cmds = 0; cmd_line->seq[nb_cmds] != 0; nb_cmds++) {}
     
     // allocating memory for nb_cmds-1 pipes
     pipes = (int **) malloc(sizeof(int *) * nb_cmds -1);
@@ -72,12 +63,25 @@ void exec_cmd_line(struct cmdline *cmd_line) {
             execvp(cmd[0], cmd);
             // if execvp returns, it must have failed
             exec_error(cmd[0]);
-        } 
+        } else {
+            // the parent process adds the child process to the right list
+            if (cmd_line->mode == FG) {
+                fprintf(stderr, "Adding %d to fg list\n", pid);
+                add_to_list(fg_list, pid);
+            }
+            else {
+                fprintf(stderr, "Adding %d to fg list\n", pid);
+                add_to_list(bg_list, pid);
+            }
+        }
     }
+
     // clossing all pipes in the parent process
     pipes_handling(pipes, nb_cmds-1, -1);
     // waiting for all the children to terminate
-    while(wait(NULL) > 0);
+    
+    while(!is_empty_list(fg_list));
+
     return;
 }
 
@@ -85,7 +89,6 @@ void pipes_handling(int **pipes, int nb_pipes, int rank) {
 
     // for each pipe
     for (int i = 0; i < nb_pipes; i++) {
-
         if (i == rank-1) {
             dup2(pipes[i][0],0);
             close(pipes[i][1]);

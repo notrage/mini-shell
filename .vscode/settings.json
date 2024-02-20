@@ -1,6 +1,8 @@
 {
     "files.associations": {
         "unistd.h": "c",
-        "locale": "c"
+        "locale": "c",
+        "csapp.h": "c",
+        "interpreter.h": "c"
     }
 }

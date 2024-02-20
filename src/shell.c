@@ -3,12 +3,16 @@
  */
 
 #include "csapp.h"
-#include "shell.h"
 #include "readcmd.h"
+#include "handlers.h"
 #include "interpreter.h"
 
 int main()
 {
+	fg_list = create_list();
+	bg_list = create_list();
+	Signal (SIGCHLD, sigchild_handler);
+
 	struct cmdline *l = NULL;
 
 	do {

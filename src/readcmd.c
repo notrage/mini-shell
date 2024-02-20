@@ -195,10 +195,8 @@ struct cmdline *readcmd(void)
 	while ((w = words[i++]) != 0) {
 		switch (w[0]) {
 		case '&':
-			if (words[i] == 0)
-				s->mode = 1;
-			else 
-			{
+			if (words[i] == 0) s->mode = 1;
+			else {
 				s->err = "unexpected &";
 				goto error;
 			}
