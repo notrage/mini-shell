@@ -9,4 +9,6 @@
 
 void sigchild_handler(int sig);
 
+void parent_sigint_handler(int sig);
+
 #endif // HANDLERS_H

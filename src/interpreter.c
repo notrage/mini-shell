@@ -41,6 +41,7 @@ void exec_cmd_line(struct cmdline *cmd_line) {
         // forking
         if (!(pid = Fork())) // child
         {
+            Signal(SIGINT, SIG_DFL);
             // if the command has an input file, we open it
             if (cmd_line->in && process_index == 0) {
                 fd = open(cmd_line->in, O_RDONLY);
@@ -64,7 +65,7 @@ void exec_cmd_line(struct cmdline *cmd_line) {
             // if execvp returns, it must have failed
             exec_error(cmd[0]);
         } else {
-            // the parent process adds the child process to the right list
+            // the parent process adds the child process pids to the right list
             if (cmd_line->mode == FG)
                 add_to_list(fg_list, pid);
             else

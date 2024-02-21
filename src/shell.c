@@ -12,6 +12,7 @@ int main()
 	fg_list = create_list();
 	bg_list = create_list();
 	Signal (SIGCHLD, sigchild_handler);
+	Signal (SIGINT, parent_sigint_handler);
 
 	struct cmdline *l = NULL;
 
