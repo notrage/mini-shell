@@ -14,6 +14,8 @@ struct list {
 };
 typedef struct list *list_t;
 
+cell_t *create_cell(pid_t pid);
+
 list_t create_list();
 
 void add_to_list(list_t list, pid_t pid);

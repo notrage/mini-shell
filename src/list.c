@@ -17,9 +17,7 @@ list_t create_list() {
 }
 
 void add_to_list(list_t list, pid_t pid) {
-    cell_t *cell = malloc(sizeof(cell_t));
-    cell -> data = pid;
-    if (cell == NULL) exit(EXIT_FAILURE);
+    cell_t *cell = create_cell(pid);
     cell_t *cell_to_iter = list -> head;
     if (cell_to_iter == NULL) {
         list->head = cell;
@@ -36,11 +34,19 @@ void add_to_list(list_t list, pid_t pid) {
 
 int remove_from_list(list_t list, pid_t pid) {
     cell_t *cell_to_iter = list->head;
-    if (is_empty_list(list)) return 0;
+    cell_t *cell_to_remove = NULL;
+    if (cell_to_iter == NULL) {
+        return 0;
+    }
+    if (cell_to_iter->data == pid) {
+        list->head = cell_to_iter->next;
+        free(cell_to_iter);
+        return 1;
+    }
     while (cell_to_iter->next != NULL) {
         if (cell_to_iter->next->data == pid) {
-            cell_t *cell_to_remove = cell_to_iter->next;
-            cell_to_iter->next = cell_to_remove->next;
+            cell_to_remove = cell_to_iter->next;
+            cell_to_iter->next = cell_to_iter->next->next;
             free(cell_to_remove);
             return 1;
         }
@@ -56,7 +62,9 @@ int is_empty_list(list_t list) {
 void print_list(list_t list) {
     cell_t *cell_to_iter = list->head;
     while (cell_to_iter != NULL) {
-        fprintf(stderr, "%d\n", cell_to_iter->data);
+        fprintf(stderr, "%d->", cell_to_iter->data);
         cell_to_iter = cell_to_iter->next;
     }
+    fprintf(stderr, "NULL\n");
+    return;
 }

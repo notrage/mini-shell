@@ -65,23 +65,17 @@ void exec_cmd_line(struct cmdline *cmd_line) {
             exec_error(cmd[0]);
         } else {
             // the parent process adds the child process to the right list
-            if (cmd_line->mode == FG) {
-                fprintf(stderr, "Adding %d to fg list\n", pid);
+            if (cmd_line->mode == FG)
                 add_to_list(fg_list, pid);
-            }
-            else {
-                fprintf(stderr, "Adding %d to fg list\n", pid);
+            else
                 add_to_list(bg_list, pid);
-            }
         }
     }
 
     // clossing all pipes in the parent process
     pipes_handling(pipes, nb_cmds-1, -1);
-    // waiting for all the children to terminate
-    
+    // waiting for all foreground processes to finish
     while(!is_empty_list(fg_list));
-
     return;
 }
 
