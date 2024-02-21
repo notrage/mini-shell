@@ -1,0 +1,10 @@
+#
+# ctrl_c.txt - Tester la gestion du ^C, qui ne tue pas le shell mais tout ses fils
+#
+./infinite_loop &
+./attente_1s &
+ps
+echo
+killall SIGINT
+echo
+ps

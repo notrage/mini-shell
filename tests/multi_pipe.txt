@@ -1,0 +1,5 @@
+#
+# multi_pipe.txt - Tester plusieurs commandes reliées par plusieurs pipes
+#
+ls | cat | wc
+man ps | wc | wc | cat

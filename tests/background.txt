@@ -1,0 +1,8 @@
+#
+# background.txt - Tester le lancement de processus en arrière plan, ainsi que leur terminaison
+#
+./attente_1s &
+ps
+echo
+./attente_1s
+ps
