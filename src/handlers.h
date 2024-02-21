@@ -7,6 +7,8 @@
 #include "error.h"
 #include "global.h"
 
+//char *PROMPT = "PUM-TZIN > ";
+
 void sigchild_handler(int sig);
 
 void parent_sigint_handler(int sig);

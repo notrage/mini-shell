@@ -3,14 +3,17 @@
  */
 
 #include "csapp.h"
+#include "global.h"
 #include "readcmd.h"
 #include "handlers.h"
 #include "interpreter.h"
 
 int main()
 {
+	// initialize the lists
 	fg_list = create_list();
 	bg_list = create_list();
+	// redirect the signals to the handlers
 	Signal (SIGCHLD, sigchild_handler);
 	Signal (SIGINT, parent_sigint_handler);
 

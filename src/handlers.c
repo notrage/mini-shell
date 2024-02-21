@@ -11,8 +11,8 @@ void sigchild_handler(int sig) {
 }
 
 void parent_sigint_handler(int sig) {
-    fprintf(stderr, " detected !\n");
-    fprintf(stderr, "killing all sub-process !\n");
-    fprintf(stderr, "PUM-TZIN > ");
+    printf(" detected !\n");
+    printf("killing all sub-process !\n");
+    printf("PUM-TZIN > ");
     return;
 }
