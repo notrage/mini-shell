@@ -58,13 +58,3 @@ int remove_from_list(list_t list, pid_t pid) {
 int is_empty_list(list_t list) {
     return list->head == NULL;
 }
-
-void print_list(list_t list) {
-    cell_t *cell_to_iter = list->head;
-    while (cell_to_iter != NULL) {
-        fprintf(stderr, "%d->", cell_to_iter->data);
-        cell_to_iter = cell_to_iter->next;
-    }
-    fprintf(stderr, "NULL\n");
-    return;
-}
