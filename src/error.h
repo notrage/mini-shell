@@ -20,7 +20,7 @@ void open_error(char *file);
 
 /**
  * @brief print a simple error message if there was an error during a command execution.
- * @param error error raised during the reading of the command
+ * @param cmd error raised during the execution of the command
  * @return void
 */
 void cmd_line_error(char *cmd);
