@@ -1,12 +1,5 @@
 #include "internal_cmd.h"
 
 void quit() {
-    fprintf(stdout, "Goodbye, have a nice day!\n");
-    kill(SIGTERM);
-    return;
+    exit(0);
 }
-
-// void chdir(char * path) {
-    
-//     return;
-// }

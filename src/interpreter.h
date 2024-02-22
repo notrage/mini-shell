@@ -10,6 +10,8 @@
 #define FG 0
 #define BG 1
 
+void cmd_intern_extern(struct cmdline *cmd_line);
+
 /**
  * @brief handles the redirection and closing of pipes for one command.
  * @param pipes array of pipes

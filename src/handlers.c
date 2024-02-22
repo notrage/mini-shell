@@ -11,7 +11,7 @@ void sigchild_handler(int sig) {
 }
 
 void parent_sigint_handler(int sig) {
-    printf("killing all sub-process !\n");
+    printf(" Killing all sub-process !\n");
     printf("PUM-TZIN > ");
     fflush(stdout);
     return;

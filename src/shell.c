@@ -25,7 +25,7 @@ int main()
 		// read command line
 		l = readcmd();
 		// interpret command line
-		exec_cmd_line(l);
+		cmd_intern_extern(l);
 	
 	} while (l);
 

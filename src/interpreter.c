@@ -1,9 +1,13 @@
 #include "interpreter.h"
 
 void cmd_intern_extern(struct cmdline *cmd_line) {
-    if (strcmp(cmd_line->seq[0][0], "quit"))
+    
+    // if user type ^D (EOF) in the shell, quit the executions
+    if (!cmd_line) return;
+
+    if (cmd_line->seq[1] == NULL && !strcmp(cmd_line->seq[0][0], "quit"))
         quit();
-    else if (strcmp(cmd_line->seq[0][0], "ch"))
+    else if (cmd_line->seq[1] == NULL && !strcmp(cmd_line->seq[0][0], "cd"))
         chdir(cmd_line->seq[0][1]);
     else
         exec_cmd_line(cmd_line);
@@ -16,9 +20,6 @@ void exec_cmd_line(struct cmdline *cmd_line) {
     char **cmd;
     int **pipes;
     pid_t pid;
-
-    // if user type ^D (EOF) in the shell, quit the executions
-    if (!cmd_line) return;
 
     if (cmd_line->err) {
         cmd_line_error(cmd_line->err);
@@ -42,11 +43,6 @@ void exec_cmd_line(struct cmdline *cmd_line) {
 
         // getting the command
         cmd = cmd_line->seq[process_index];
-
-        // if the command is "quit" or "exit", we quit the program
-        if (!strcmp(cmd[0], "quit") || !strcmp(cmd[0], "exit")) 
-            exit(0);
-        // don't use else there because we want to quit the program if the command is "quit" or "exit"
 
         // forking
         if (!(pid = Fork())) // child
