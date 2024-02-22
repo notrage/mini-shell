@@ -10,6 +10,13 @@
 #define FG 0
 #define BG 1
 
+/**
+ * @brief if first command of the sequence is an internal command, it executes it and give back the prompt.
+ *        Else it calls the exec_cmd_line function to executes external commands.
+ * @param cmd_line  structure cmdline containing a sequence of command, the mode with which they should be launch 
+ *        (foreground or background) and potential intput / output redirections and/or error messages.
+ * @return void
+*/
 void cmd_intern_extern(struct cmdline *cmd_line);
 
 /**
@@ -23,7 +30,7 @@ void cmd_intern_extern(struct cmdline *cmd_line);
 void pipes_handling(int **pipes, int nb_pipes, int rank);
 
 /**
- * @brief handles the execution of the command line received as parameter.
+ * @brief execute the command line received as parameter.
  * @param cmd_line structure cmdline containing a sequence of command, the mode with which they should be launch 
  *        (foreground or background) and potential intput / output redirections and/or error messages.
  * @return void

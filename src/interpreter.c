@@ -8,7 +8,7 @@ void cmd_intern_extern(struct cmdline *cmd_line) {
     if (cmd_line->seq[1] == NULL && !strcmp(cmd_line->seq[0][0], "quit"))
         quit();
     else if (cmd_line->seq[1] == NULL && !strcmp(cmd_line->seq[0][0], "cd"))
-        chdir(cmd_line->seq[0][1]);
+        cd(cmd_line->seq[0][1]);
     else
         exec_cmd_line(cmd_line);
     return;
