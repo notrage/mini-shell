@@ -1,5 +1,15 @@
 #include "interpreter.h"
 
+void cmd_intern_extern(struct cmdline *cmd_line) {
+    if (strcmp(cmd_line->seq[0][0], "quit"))
+        quit();
+    else if (strcmp(cmd_line->seq[0][0], "ch"))
+        chdir(cmd_line->seq[0][1]);
+    else
+        exec_cmd_line(cmd_line);
+    return;
+}
+
 void exec_cmd_line(struct cmdline *cmd_line) {
 
     int nb_cmds, fd;

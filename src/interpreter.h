@@ -5,6 +5,7 @@
 #include "error.h"
 #include "global.h"
 #include "readcmd.h"
+#include "internal_cmd.h"
 
 #define FG 0
 #define BG 1
