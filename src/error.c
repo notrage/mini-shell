@@ -10,7 +10,7 @@ void open_error(char *file) {
     return;
 }
 
-void cmd_line_error(char *error) {
-    fprintf(stderr, "error: %s\n", error);
+void cmd_line_error(char *cmd) {
+    fprintf(stderr, "error: %s\n", cmd);
     return;
 }

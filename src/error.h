@@ -6,7 +6,7 @@
 
 /**
  * @brief print a simple error message when an exec failed.
- * @param cmd command name of failed command
+ * @param cmd the failed command
  * @return void
 */
 void exec_error(char *cmd);
@@ -19,10 +19,10 @@ void exec_error(char *cmd);
 void open_error(char *file);
 
 /**
- * @brief print a simple error message if there was an error during the reading of the command by the readline function.
+ * @brief print a simple error message if there was an error during a command execution.
  * @param error error raised during the reading of the command
  * @return void
 */
-void cmd_line_error(char *error);
+void cmd_line_error(char *cmd);
 
 #endif // ERROR_H
