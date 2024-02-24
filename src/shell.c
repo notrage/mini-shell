@@ -21,7 +21,7 @@ int main()
 
 	do {
 		// giving the prompt
-		printf("PUM-TZIN > ");
+		printf("MINI SHELL > ");
 		// read command line
 		l = readcmd();
 		// interpret command line
