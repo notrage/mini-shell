@@ -16,7 +16,7 @@ INCLUDE = readcmd.h csapp.h
 OBJS = readcmd.o csapp.o interpreter.o error.o handlers.o list.o internal_cmd.o
 INCLDIR = -Isrc
 
-all: shell
+all: shell infinite_loop Hello_world attente_1s
 
 %.o: %.c $(INCLUDE)
 	$(CC) $(CFLAGS) $(INCLDIR) -c -o $@ $<
@@ -25,5 +25,5 @@ all: shell
 	$(CC) -o $@ $(LDFLAGS) $^ $(LIBS)
 
 clean:
-	rm -f shell *.o
+	rm -f shell infinite_loop Hello_world attente_1s *.o
 
