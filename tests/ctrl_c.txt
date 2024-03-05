@@ -5,6 +5,6 @@
 ./attente_1s &
 ps
 echo
-killall -SIGINT shell
+killall SIGINT
 echo
 ps

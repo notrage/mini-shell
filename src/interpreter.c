@@ -5,6 +5,11 @@ void cmd_intern_extern(struct cmdline *cmd_line) {
     // if user type ^D (EOF) in the shell, quit the executions
     if (!cmd_line) return;
 
+    if (cmd_line->err) {
+        cmd_line_error(cmd_line->err);
+        return;
+    }
+
     if (cmd_line->seq[1] == NULL && !strcmp(cmd_line->seq[0][0], "quit"))
         quit();
     else if (cmd_line->seq[1] == NULL && !strcmp(cmd_line->seq[0][0], "cd"))
@@ -20,11 +25,6 @@ void exec_cmd_line(struct cmdline *cmd_line) {
     char **cmd;
     int **pipes;
     pid_t pid;
-
-    if (cmd_line->err) {
-        cmd_line_error(cmd_line->err);
-        return;
-    }
 
     // counting the number of commandes in the command line
     for (nb_cmds = 0; cmd_line->seq[nb_cmds] != 0; nb_cmds++) {}
