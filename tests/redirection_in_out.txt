@@ -1,7 +1,0 @@
-#
-# redirection_in_out.txt - Tester les redirections d'entrées/sorties, avec ou sans pipes
-#
-cat < tests/redirection_in_out.txt
-man ls | cat > manuel_ls.txt
-cat < manuel_ls.txt > copy_manuel_ls.txt
-cat < copy_manuel_ls.txt | wc > nb_mots_cpy_man_ls.txt

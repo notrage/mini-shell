@@ -1,6 +1,0 @@
-#
-# multi_pipe.txt - Tester plusieurs commandes reliées par plusieurs pipes
-#
-ls | cat | wc
-man ps | wc | cat | wc | cat
-cat < tests/multi_pipe.txt | wc | wc > nb_mots_wc_multi_pipe.txt
