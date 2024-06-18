@@ -25,4 +25,4 @@ all: shell infinite_loop attente_1s test
 	$(CC) -o $@ $(LDFLAGS) $^ $(LIBS)
 
 clean:
-	rm -f shell infinite_loop test attente_1s *.o
+	rm -f shell infinite_loop test attente_1s hello_world*.o
