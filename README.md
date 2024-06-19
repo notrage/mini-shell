@@ -1,7 +1,20 @@
 # Mini Shell
-This is a university project (in collaboration with [Axel Deleuze-Dordron](https://github.com/Stonksmen)) that aim to create a mini shell
-## How to use ?
-- First of all, you will need to clone this git repository: git clone git@github.com:notrage/mini-shell.git
-- You will need to compile this project using this command : `make`
-- Then you will have to run the **mini-shell** using : `./shell`
-- Finally you can type linux commands or name of executable files
+This is a university project (in collaboration with [Axel Deleuze-Dordron](https://github.com/Stonksmen)) that aim to create a mini shell.
+## Installation
+1. Clone this git repository :
+```bash
+git clone git@github.com:notrage/mini-shell.git
+```
+2. Navigate to the project directory:
+```bash
+cd mini-shell
+```
+3. Build the project :
+```bash
+make
+```
+4. Run the mini-shell:
+```bash
+./shell
+```
+You are now able to execute linux commands and executable files.
